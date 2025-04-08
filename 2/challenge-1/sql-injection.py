@@ -12,8 +12,8 @@ def show_user(request, username):
         cursor.execute("SELECT * FROM users WHERE username = %s", username)
         user = cursor.fetchone()
 
-        # BAD -- Manually quoting placeholder (%s)
-        cursor.execute("SELECT * FROM users WHERE username = '%s'" % username)
+        # GOOD -- Using parameters
+        cursor.execute("SELECT * FROM users WHERE username = %s", [username])
         user = cursor.fetchone()
 
         # GOOD - string literal
